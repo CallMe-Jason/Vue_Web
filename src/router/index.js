@@ -20,6 +20,7 @@ const router = new VueRouter({
   routes
 })
 
+//路由导航守卫
 router.beforeEach((to,from,next)=>{
   //to代表将要访问的路径 from代表从哪个路径跳转而来 next是一个函数表示放行next()放行，next('/login')强制跳转
   if(to.path === '/login') return next()

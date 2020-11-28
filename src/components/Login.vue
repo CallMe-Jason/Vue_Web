@@ -5,6 +5,7 @@
         <img src="../assets/logo.png" alt="">
       </div>
       <el-form :model="loginForm" ref="loginFormRef" label-width="0px" :rules="loginFormRules"  class="login_form">
+        <!-- :model表示绑定的登录对象 -->
         <!-- 用户名 -->
         <el-form-item prop="username">
           <el-input v-model="loginForm.username" prefix-icon="iconfont icon-user"></el-input>
@@ -27,8 +28,8 @@ export default {
     return {
       //这是登录
       loginForm: {
-        username: '',
-        password: ''
+        username: 'admin',
+        password: '123456'
       },
       //这是表单的验证规则对象
       loginFormRules: {
@@ -60,7 +61,9 @@ export default {
         if(res.meta.status !== 200) return this.$message.error('登录失败')
         // console.log('登录成功');
         this.$message.success('登录成功')
+        //设置服务器返回的token保存到本地
         window.sessionStorage.setItem('token',res.data.token)
+        //跳转到home页面
         this.$router.push('/home')
       })
     }
@@ -108,7 +111,7 @@ export default {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 0 20px;
+  padding: 0 30px;
   box-sizing: border-box;
 }
 </style>
