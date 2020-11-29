@@ -8,15 +8,16 @@
       <el-button type="info" @click="logout">退出</el-button>
     </el-header>
     <el-container>
-      <el-aside width="200px">
-        <el-menu background-color="#333744" text-color="#fff" :unique-opened="true">
+      <el-aside :width="isCollapse? '64px' : '200px'">
+        <div class="toggle-button" @click="toggleCollapse">｜｜｜</div>
+        <el-menu background-color="#333744" text-color="#fff" :unique-opened="true" :collapse="isCollapse" :collapse-transition="false" :router="true" :default-active="activePath">
           <el-submenu :index="item.id + ''" v-for="item in menulist" :key="item.id">
             <template slot="title">
               <i :class="iconObj[item.id]"></i>
               <span>{{item.authName}}</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item :index="subItem.id + ''" v-for="subItem in item.children" :key="subItem.id">
+              <el-menu-item :index="'/' + subItem.path + ''" v-for="subItem in item.children" :key="subItem.id" @click="saveNavState('/' + subItem.path + '')">
                 <i class="el-icon-menu"></i>
                 {{subItem.authName}}
               </el-menu-item>
@@ -24,7 +25,9 @@
           </el-submenu>
         </el-menu>
       </el-aside>
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -39,11 +42,16 @@ export default {
         '101': 'iconfont icon-shangpin',
         '102': 'iconfont icon-danju',
         '145': 'iconfont icon-baobiao'
-      }
+      },
+      //是否折叠
+      isCollapse: false,
+      //被激活的链接设置
+      activePath: ''
     }
   },
   created() {
     this.getMenuList();
+    this.activePath = window.sessionStorage.getItem('activePath')
   },
   name: "home",
   methods: {
@@ -61,6 +69,15 @@ export default {
       this.menulist = res.data
       console.log(res);
     },
+    toggleCollapse(){
+      //点击按钮切换菜单的折叠和展开
+      this.isCollapse = !this.isCollapse
+    },
+    //保存链接的激活状态
+    saveNavState(activePath) {
+      window.sessionStorage.setItem('activePath',activePath)
+          this.activePath = activePath
+    }
   },
 };
 </script>
@@ -107,5 +124,13 @@ export default {
 }
 .el-menu {
     border-right: solid 0px !important;
+}
+.toggle-button {
+  background-color: #4A5064;
+  font-size: 10px;
+  line-height: 24px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
 }
 </style>

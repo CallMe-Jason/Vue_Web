@@ -49,12 +49,12 @@ export default {
   methods: {
     //点击重置按钮，重置登录表单
     resetLoginForm: function(){
-      // console.log(this);
+      // console.log(this.$refs);
       this.$refs.loginFormRef.resetFields()
     },
     login: function(){
       this.$refs.loginFormRef.validate(async valid=>{
-        // console.log(valid);
+        console.log(valid);
         if(!valid) return;
         const { data:res } = await this.$http.post('login',this.loginForm)
         // console.log(res);
