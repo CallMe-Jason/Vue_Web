@@ -36,6 +36,7 @@
           <el-table-column label="角色" prop="role_name"></el-table-column>
           <el-table-column label="状态">
             <template slot-scope="scope">
+              <!-- {{scope.row}} -->
               <el-switch
                 v-model="scope.row.mg_state"
                 @change="userStateChanged(scope.row)"
@@ -154,6 +155,7 @@
 </template>
 <script>
 export default {
+  name:"Users",
   data() {
     //验证邮箱的规则
     var checkEmail = (rule, value, cb) => {
@@ -163,7 +165,7 @@ export default {
         return cb();
       }
       cb(new Error("请输入合法的邮箱"));
-    };
+    }
     //验证手机号的规则
     var checkMobile = (rule, value, cb) => {
       //验证手机号的正则
@@ -276,6 +278,7 @@ export default {
       const {data: res} = await this.$http.get('users/' + id)
       if(res.meta.status !== 200) return this.$message.error('查询用户信息失败')
       this.editForm = res.data
+      // console.log();
       this.editDialogVisible = true
     },
     editUserInfo(){
@@ -307,9 +310,13 @@ export default {
         const {data: res} = await this.$http.delete('users/' + id)
         if(res.meta.status !== 200) return this.$message.error('删除失败')
         this.$message.success('删除成功')
+        if (this.userlist.length === 1) {
+           this.queryInfo.pagenum = this.queryInfo.pagenum > 1 ? this.queryInfo.pagenum - 1 : 1 
+           } 
         this.getUserList()
   }
   }
+  
 };
 </script>
 <style lang="less" scoped>
