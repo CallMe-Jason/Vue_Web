@@ -29,7 +29,7 @@
           </el-col>
         </el-row>
         <el-table :data="userlist" border stripe>
-          <el-table-column type="index"></el-table-column>
+          <el-table-column label="#" type="index"></el-table-column>
           <el-table-column label="姓名" prop="username"></el-table-column>
           <el-table-column label="邮箱" prop="email"></el-table-column>
           <el-table-column label="电话" prop="mobile"></el-table-column>
@@ -189,7 +189,12 @@ export default {
       addDialogVisible: false,
       editDialogVisible: false,
       editForm:{},
-      addForm: {},
+      addForm: {
+        username: '',
+        password: '',
+        email: '',
+        mobile: ''
+      },
       addFormRules: {
         username: [
           { required: true, message: "请输入用户名", trigger: "blur" },
