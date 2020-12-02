@@ -110,8 +110,9 @@ export default {
       if(res.meta.status !== 200) return this.$message.error('获取数据失败')
       this.rightslist = res.data
       this.getLeafKeys(role,this.defKeys)
+      // console.log(this.defKeys);
       this.setRightDialogVisible = true
-      console.log(this.rightslist);
+      // console.log(this.rightslist);
     },
     //通过递归的形式获取三级权限的id并保存到数组中
     getLeafKeys(node,arr){
