@@ -23,18 +23,18 @@
 </template>
 <script>
 export default {
-  data(){
-    return{
+  data () {
+    return {
       rightsList: []
     }
   },
-  created(){
+  created () {
     this.getRightsList()
   },
   methods: {
-    async getRightsList(){
-      const {data:res} = await this.$http.get('rights/list')
-      if(res.meta.status !== 200) {
+    async getRightsList () {
+      const { data: res } = await this.$http.get('rights/list')
+      if (res.meta.status !== 200) {
         return this.$message.error('获取权限列表失败')
       }
       this.rightsList = res.data

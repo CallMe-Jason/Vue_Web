@@ -33,53 +33,53 @@
 </template>
 <script>
 export default {
-  data(){
-    return{
-      menulist: [],//左侧菜单数据
+  data () {
+    return {
+      menulist: [], // 左侧菜单数据
       iconObj: {
-        '125': 'iconfont icon-user',
-        '103': 'iconfont icon-tijikongjian',
-        '101': 'iconfont icon-shangpin',
-        '102': 'iconfont icon-danju',
-        '145': 'iconfont icon-baobiao'
+        125: 'iconfont icon-user',
+        103: 'iconfont icon-tijikongjian',
+        101: 'iconfont icon-shangpin',
+        102: 'iconfont icon-danju',
+        145: 'iconfont icon-baobiao'
       },
-      //是否折叠
+      // 是否折叠
       isCollapse: false,
-      //被激活的链接设置
+      // 被激活的链接设置
       activePath: ''
     }
   },
-  created() {
-    this.getMenuList();
+  created () {
+    this.getMenuList()
     this.activePath = window.sessionStorage.getItem('activePath')
   },
-  name: "home",
+  name: 'home',
   methods: {
     logout: function () {
-      //点击退出清空token值
-      window.sessionStorage.removeItem("token");
-      this.$message.success("退出成功");
-      //提示信息
-      this.$router.push("/login");
-      //强制跳转回登录界面
+      // 点击退出清空token值
+      window.sessionStorage.removeItem('token')
+      this.$message.success('退出成功')
+      // 提示信息
+      this.$router.push('/login')
+      // 强制跳转回登录界面
     },
-    async getMenuList() {
-      const {data: res} = await this.$http.get('menus');
-      if(res.meta.status !== 200) return this.$message.error(res.meta.msg)
+    async getMenuList () {
+      const { data: res } = await this.$http.get('menus')
+      if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
       this.menulist = res.data
       // console.log(res);
     },
-    toggleCollapse(){
-      //点击按钮切换菜单的折叠和展开
+    toggleCollapse () {
+      // 点击按钮切换菜单的折叠和展开
       this.isCollapse = !this.isCollapse
     },
-    //保存链接的激活状态
-    saveNavState(activePath) {
-      window.sessionStorage.setItem('activePath',activePath)
-          this.activePath = activePath
+    // 保存链接的激活状态
+    saveNavState (activePath) {
+      window.sessionStorage.setItem('activePath', activePath)
+      this.activePath = activePath
     }
-  },
-};
+  }
+}
 </script>
 <style lang="less" scoped>
 .el-header {

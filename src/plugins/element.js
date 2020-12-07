@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { 
+import {
   Button,
   Form,
   FormItem,
@@ -37,8 +37,14 @@ import {
   Step,
   Steps,
   CheckboxGroup,
-  Checkbox
- } from 'element-ui'
+  Checkbox,
+  Upload,
+  Timeline,
+  TimelineItem
+} from 'element-ui'
+
+//  import Timeline from './timeline/index.js'
+//  import TimelineItem from './timeline-item/index.js'
 
 Vue.use(Button)
 // import { from } from 'core-js/fn/array'
@@ -76,7 +82,9 @@ Vue.use(Step)
 Vue.use(Steps)
 Vue.use(CheckboxGroup)
 Vue.use(Checkbox)
+Vue.use(Upload)
+Vue.use(Timeline)
+Vue.use(TimelineItem)
 
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
-
